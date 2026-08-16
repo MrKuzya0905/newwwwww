@@ -1,37 +1,50 @@
-def count_vowels(s):
-    vowels = "aeiou"
-    count = 0
+from collections import deque
 
-    for char in s.lower():
-        if char in vowels:
-            count += 1
+queue = deque()
 
-    return count
+queue.append("Олексій")
+queue.append("Марія")
+queue.append("Іван")
+queue.append("Анна")
 
+print("Черга:", queue)
 
-print(count_vowels("hello world"))
+print("Перший у черзі:", queue[0])
 
+while queue:
+    client = queue.popleft()
+    print("Обслуговуємо:", client)
 
-def flatten_list(nested_list):
-    result = []
-
-    for sublist in nested_list:
-        for item in sublist:
-            result.append(item)
-
-    return result
+print("Черга порожня")
 
 
-print(flatten_list([[1, 2], [3, 4], [5, 6]]))
+# Друге завдання
 
-def fibonacci(n):
-    a = 0
-    b = 1
+def check_brackets(text):
+    stack = []
 
-    for i in range(n):
-        a, b = b, a + b
+    pairs = {
+        ')': '(',
+        ']': '[',
+        '}': '{'
+    }
 
-    return a
+    for char in text:
+        if char in "([{":
+            stack.append(char)
 
+        elif char in ")]}":
+            if not stack or stack[-1] != pairs[char]:
+                return False
 
-print(fibonacci(10))
+            stack.pop()
+
+    return len(stack) == 0
+
+print(check_brackets("()"))          # True
+print(check_brackets("({[]})"))      # True
+print(check_brackets("([{}])"))      # True
+print(check_brackets("(]"))          # False
+print(check_brackets("([)]"))        # False
+print(check_brackets("((("))         # False
+print(check_brackets("abc"))         # True
