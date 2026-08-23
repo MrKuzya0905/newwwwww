@@ -426,35 +426,35 @@ import random, time, heapq
 # та стають у чергу, поки не доходить черга
 # до аналізатора, котрий бере перший документ і «перевіряє» його.
 
-import random
+# import random
 
-class DocumentQueue:
-    def __init__(self):
-        self.docs = []
+# class DocumentQueue:
+#     def __init__(self):
+#         self.docs = []
 
-    def enqueue(self, doc):
-        self.docs.append(doc)
+#     def enqueue(self, doc):
+#         self.docs.append(doc)
 
-    def dequeue(self):
-        ...
+#     def dequeue(self):
+#         ...
 
-    def size(self):
-        return len(self.docs)
+#     def size(self):
+#         return len(self.docs)
 
-doc_queue = DocumentQueue()
-doc_types = ["PDF", "DOC", "IMG", "TXT"]
+# doc_queue = DocumentQueue()
+# doc_types = ["PDF", "DOC", "IMG", "TXT"]
 
-for i in range(5):
-    doc_type = random.choice(doc_types)
-    doc_name = f"File_{i}.{doc_type.lower()}"
-    doc_queue.enqueue(doc_name)
-    print("Надійшов документ:", doc_name)
+# for i in range(5):
+#     doc_type = random.choice(doc_types)
+#     doc_name = f"File_{i}.{doc_type.lower()}"
+#     doc_queue.enqueue(doc_name)
+#     print("Надійшов документ:", doc_name)
 
-print("Загальна кількість документів:", doc_queue.size())
+# print("Загальна кількість документів:", doc_queue.size())
 
-while doc_queue.size() > 0:
-    current_doc = doc_queue.dequeue()
-    print(f"Обробляємо: {current_doc}")
+# while doc_queue.size() > 0:
+#     current_doc = doc_queue.dequeue()
+#     print(f"Обробляємо: {current_doc}")
 
 
 # У графічному редакторі кожен крок (наприклад,
@@ -503,7 +503,158 @@ while doc_queue.size() > 0:
 #   else:
 #     return fib(n - 1) + fib(n - 2)
 
-def sum_item_list(lst):
-    if not lst:
-        return 0
-    lst[0] + sum_item_list[1:]
+# def sum_item_list(lst):
+#     if not lst:
+#         return 0
+#     lst[0] + sum_item_list[1:]
+
+# ЗАВДАННЯ 1
+# Створіть рекурсивну функцію, що обчислює степінь числа x у натуральній степені n.
+# Базовий випадок: якщо n=0, повернути 1.
+# Якщо n>0, повернути x∗power(x,n−1).
+# x∗power(x,n−1)x * power(x, n-1)
+
+
+# def power(x, n):
+#     if n == 0:
+#         return 1
+#     return x * power(x, n-1)
+
+# print(power(5,0))
+
+# ЗАВДАННЯ 2
+# Напишіть рекурсивну функцію, що визначає, чи є список упорядкованим (зростаючим).
+# Якщо список довжиною 0 або 1 — він упорядкований.
+# Для довшого списку перевірити, чи перші два елементи задовольняють
+# умову зростання, і рекурсивно викликати для «хвоста» списку.
+
+# ЗАВДАННЯ 2
+# Напишіть рекурсивну функцію, що визначає, чи є список упорядкованим (зростаючим).
+# Якщо список довжиною 0 або 1 — він упорядкований.
+# Для довшого списку перевірити, чи перші два елементи задовольняють
+# умову зростання, і рекурсивно викликати для «хвоста» списку.
+
+
+# def is_sorted_asc(lst):
+#     if len(lst) < 2:
+#         return True
+
+#     if lst[0] > lst[1]:
+#         return False
+
+#     return is_sorted_asc(lst[1:])
+
+
+# print(is_sorted_asc([1, 2, 4, 3, 5]))  
+
+# def swap_elements(lst, i):
+#     lst[i], lst[i + 1] = lst[i + 1], lst[i]
+#     return lst
+
+
+# lst = [1, 2, 3, 4, 5]
+
+# print(swap_elements(lst, 1))
+
+# def bubble_sort(lst):
+#     count = 0
+
+#     for _ in range(len(lst) - 1):
+#         swapped = False
+
+#         for i in range(len(lst) - 1):
+#             if lst[i] > lst[i + 1]:
+#                 lst[i], lst[i + 1] = lst[i + 1], lst[i]
+#                 count += 1
+#                 swapped = True
+
+#         print(lst)
+
+#         if not swapped:
+#             break
+
+#     print("Кількість замін:", count)
+#     return lst
+
+
+# numbers = [5, 2, 9, 1, 7]
+
+# bubble_sort(numbers)
+# print(numbers)
+
+# def bubble_sort_by_age(lst):
+#     for _ in range(len(lst) - 1):
+#         swapped = False
+
+#         for i in range(len(lst) - 1):
+#             if lst[i]['age'] > lst[i + 1]['age']:
+#                 lst[i], lst[i + 1] = lst[i + 1], lst[i]
+#                 swapped = True
+
+#         if not swapped:
+#             break
+
+#     return lst
+
+
+# people_data = [
+#     {'name': 'Bob', 'age': 25},
+#     {'name': 'Alice', 'age': 30},
+#     {'name': 'Charlie', 'age': 20}
+# ]
+
+# bubble_sort_by_age(people_data)
+
+# print(people_data)
+
+# def bubble_sort(lst):
+#     count = 0
+
+#     for _ in range(len(lst) - 1):
+#         swapped = False
+
+#         for i in range(len(lst) - 1):
+#             if lst[i] > lst[i + 1]:
+#                 lst[i], lst[i + 1] = lst[i + 1], lst[i]
+#                 count += 1
+#                 swapped = True
+
+#         print(lst)
+
+#         if not swapped:
+#             break
+
+#     print("Кількість замін:", count)
+#     return lst
+
+def selection_sort(arr) -> None:
+    n = len(arr)
+    comparisons = 0
+    swaps = 0
+
+    for i in range(n - 1):
+        idx_min_number = i
+
+        for j in range(i + 1, n):
+            comparisons += 1
+            if arr[j] < arr[idx_min_number]:
+                idx_min_number = j
+
+        if idx_min_number != i:
+            swaps += 1
+            print(f"Знайдено мінімум: {arr[idx_min_number]}")
+            print(f"Міняємо {arr[i]} і {arr[idx_min_number]}")
+
+            arr[i], arr[idx_min_number] = arr[idx_min_number], arr[i]
+            
+
+            print("Список після заміни:", arr)
+            print()
+
+    print("Відсортований список:", arr)
+    print("Compa4risons: ", comparisons)
+
+
+numbers = [5, 7, 1, 3, 2, 8, 12, 5, 3, 7, 8]
+
+selection_sort(numbers)
