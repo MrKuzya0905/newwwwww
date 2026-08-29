@@ -557,104 +557,180 @@ import random, time, heapq
 # print(swap_elements(lst, 1))
 
 # def bubble_sort(lst):
-#     count = 0
+# #     count = 0
 
-#     for _ in range(len(lst) - 1):
-#         swapped = False
+# #     for _ in range(len(lst) - 1):
+# #         swapped = False
 
-#         for i in range(len(lst) - 1):
-#             if lst[i] > lst[i + 1]:
-#                 lst[i], lst[i + 1] = lst[i + 1], lst[i]
-#                 count += 1
-#                 swapped = True
+# #         for i in range(len(lst) - 1):
+# #             if lst[i] > lst[i + 1]:
+# #                 lst[i], lst[i + 1] = lst[i + 1], lst[i]
+# #                 count += 1
+# #                 swapped = True
 
-#         print(lst)
+# #         print(lst)
 
-#         if not swapped:
-#             break
+# #         if not swapped:
+# #             break
 
-#     print("Кількість замін:", count)
-#     return lst
-
-
-# numbers = [5, 2, 9, 1, 7]
-
-# bubble_sort(numbers)
-# print(numbers)
-
-# def bubble_sort_by_age(lst):
-#     for _ in range(len(lst) - 1):
-#         swapped = False
-
-#         for i in range(len(lst) - 1):
-#             if lst[i]['age'] > lst[i + 1]['age']:
-#                 lst[i], lst[i + 1] = lst[i + 1], lst[i]
-#                 swapped = True
-
-#         if not swapped:
-#             break
-
-#     return lst
+# #     print("Кількість замін:", count)
+# #     return lst
 
 
-# people_data = [
-#     {'name': 'Bob', 'age': 25},
-#     {'name': 'Alice', 'age': 30},
-#     {'name': 'Charlie', 'age': 20}
-# ]
+# # numbers = [5, 2, 9, 1, 7]
 
-# bubble_sort_by_age(people_data)
+# # bubble_sort(numbers)
+# # print(numbers)
 
-# print(people_data)
+# # def bubble_sort_by_age(lst):
+# #     for _ in range(len(lst) - 1):
+# #         swapped = False
 
-# def bubble_sort(lst):
-#     count = 0
+# #         for i in range(len(lst) - 1):
+# #             if lst[i]['age'] > lst[i + 1]['age']:
+# #                 lst[i], lst[i + 1] = lst[i + 1], lst[i]
+# #                 swapped = True
 
-#     for _ in range(len(lst) - 1):
-#         swapped = False
+# #         if not swapped:
+# #             break
 
-#         for i in range(len(lst) - 1):
-#             if lst[i] > lst[i + 1]:
-#                 lst[i], lst[i + 1] = lst[i + 1], lst[i]
-#                 count += 1
-#                 swapped = True
+# #     return lst
 
-#         print(lst)
 
-#         if not swapped:
-#             break
+# # people_data = [
+# #     {'name': 'Bob', 'age': 25},
+# #     {'name': 'Alice', 'age': 30},
+# #     {'name': 'Charlie', 'age': 20}
+# # ]
 
-#     print("Кількість замін:", count)
-#     return lst
+# # bubble_sort_by_age(people_data)
 
-def selection_sort(arr) -> None:
-    n = len(arr)
-    comparisons = 0
-    swaps = 0
+# # print(people_data)
 
-    for i in range(n - 1):
-        idx_min_number = i
+# # def bubble_sort(lst):
+# #     count = 0
 
-        for j in range(i + 1, n):
-            comparisons += 1
-            if arr[j] < arr[idx_min_number]:
-                idx_min_number = j
+# #     for _ in range(len(lst) - 1):
+# #         swapped = False
 
-        if idx_min_number != i:
-            swaps += 1
-            print(f"Знайдено мінімум: {arr[idx_min_number]}")
-            print(f"Міняємо {arr[i]} і {arr[idx_min_number]}")
+# #         for i in range(len(lst) - 1):
+# #             if lst[i] > lst[i + 1]:
+# #                 lst[i], lst[i + 1] = lst[i + 1], lst[i]
+# #                 count += 1
+# #                 swapped = True
 
-            arr[i], arr[idx_min_number] = arr[idx_min_number], arr[i]
+# #         print(lst)
+
+# #         if not swapped:
+# #             break
+
+# #     print("Кількість замін:", count)
+# #     return lst
+
+# def selection_sort(arr) -> None:
+#     n = len(arr)
+#     comparisons = 0
+#     swaps = 0
+
+#     for i in range(n - 1):
+#         idx_min_number = i
+
+#         for j in range(i + 1, n):
+#             comparisons += 1
+#             if arr[j] < arr[idx_min_number]:
+#                 idx_min_number = j
+
+#         if idx_min_number != i:
+#             swaps += 1
+#             print(f"Знайдено мінімум: {arr[idx_min_number]}")
+#             print(f"Міняємо {arr[i]} і {arr[idx_min_number]}")
+
+#             arr[i], arr[idx_min_number] = arr[idx_min_number], arr[i]
             
 
-            print("Список після заміни:", arr)
-            print()
+#             print("Список після заміни:", arr)
+#             print()
 
-    print("Відсортований список:", arr)
-    print("Compa4risons: ", comparisons)
+#     print("Відсортований список:", arr)
+#     print("Compa4risons: ", comparisons)
 
 
-numbers = [5, 7, 1, 3, 2, 8, 12, 5, 3, 7, 8]
+# numbers = [5, 7, 1, 3, 2, 8, 12, 5, 3, 7, 8]
 
-selection_sort(numbers)
+# selection_sort(numbers)
+
+# def insertion_sort(arr) -> None:
+#     n = len(arr)
+#     comparisons = 0
+#     count_shifts = 0
+
+#     for i in range(1, n):
+#         curr_number = arr[i]
+#         j = i - 1
+
+#         while j >= 0 and arr[j] > curr_number:
+#             comparisons += 1
+#             arr[j + 1] = arr[j]
+#             print("Переміщення: ", arr)
+#             j -= 1
+
+#         arr[j + 1] = curr_number
+#         count_shifts += 1
+
+
+# arr = [5, 4, 9, 1, 3, 2]
+
+# insertion_sort(arr)
+
+# print(arr)
+
+# def insertion_sort_2(arr) -> None:
+#     n = len(arr)
+
+#     for i in range(1, n):
+#         curr_number = arr[i]
+#         for j in range(i-1, -1, -1):
+#             if arr[j] > curr_number:
+#                 arr[j + 1] = arr[j]
+#             else:
+#                 j += 1
+#                 break
+
+#         arr[j] = curr_number
+        
+
+# arr = [5, 4, 9, 1, 3, 2]
+# players = [
+#     {'name': 'Alice', 'score': 50},
+#     {'name': 'Bob', 'score': 20},
+#     {'name': 'Charlie', 'score': 50},
+#     {'name': 'David', 'score': 10}
+# ]
+
+# insertion_sort_2(arr)
+
+# print(arr)
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    pivot = arr[-1]
+    left = []
+    right = []
+
+    for i in range(len(arr) - 1):
+        if arr[i] < pivot:
+            right.append(arr[i])
+        else:
+            left.append(arr[i])
+
+    print("Контрольне число:", pivot)
+    print("Ліва частина:", left)
+    print("Права частина:", right)
+
+    return quick_sort(left) + [pivot] + quick_sort(right)
+
+
+arr = [5, 4, 9, 1, 3, 2]
+
+print(quick_sort(arr))
