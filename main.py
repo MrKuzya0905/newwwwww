@@ -709,28 +709,116 @@ import random, time, heapq
 
 # insertion_sort_2(arr)
 
-# print(arr)
-def quick_sort(arr):
-    if len(arr) <= 1:
-        return arr
+# # print(arr)
+# def quick_sort(arr):
+#     if len(arr) <= 1:
+#         return arr
 
-    pivot = arr[-1]
-    left = []
-    right = []
+#     pivot = arr[-1]
+#     left = []
+#     right = []
 
-    for i in range(len(arr) - 1):
-        if arr[i] < pivot:
-            right.append(arr[i])
+#     for i in range(len(arr) - 1):
+#         if arr[i] < pivot:
+#             right.append(arr[i])
+#         else:
+#             left.append(arr[i])
+
+#     print("Контрольне число:", pivot)
+#     print("Ліва частина:", left)
+#     print("Права частина:", right)
+
+#     return quick_sort(left) + [pivot] + quick_sort(right)
+
+
+# arr = [5, 4, 9, 1, 3, 2]
+
+# print(quick_sort(arr))
+
+# def linear_search(x, lst):
+#     comparisons = 0
+#     for i in range(len(lst)):
+#         comparisons += 1
+#         if lst[i] == x:
+#             return (i, comparisons)
+#     return (-1, comparisons)
+
+# numbers = [5, 7, 9, 3]
+# print(linear_search(7, numbers))
+
+# def linear_search_max(arr):
+#     max_index = 0
+
+#     for i in range(1, len(arr)):
+#         if arr[i] > arr[max_index]:
+#             max_index = i
+
+#     return max_index
+
+
+# arr = [5, 2, 9, 1, 7]
+
+# print("Масив: ", arr)
+# print("Індекс максимального елемента: ", linear_search_max(arr))
+# print("Максимальний елемент: ", arr[linear_search_max(arr)])
+
+# def linear_search_all(lst, target):
+#     indexes = []
+
+#     for i in range(len(lst)):
+#         if lst[i] == target:
+#             indexes.append(i)
+
+#     return indexes
+
+
+# arr = [5, 6, 6,  7, 6,  8, 2, 7, 3]
+
+# result = linear_search_all(arr, 6)
+
+# print("Індекси:", result)
+
+# def recursive_linear_search(arr, target, index=0):
+#     if index >= len(arr):
+#         return -1
+
+#     if arr[index] == target:
+#         return index
+
+#     return recursive_linear_search(arr, target, index + 1)
+
+# arr = [10, 25, 7, 15, 7, 30]
+
+# print(recursive_linear_search(arr, 7))
+# print(recursive_linear_search(arr, 30))
+# print(recursive_linear_search(arr, 100))
+
+# def find_first_above(arr, threshold):
+#     for i in range(len(arr)):
+#         if arr[i] > threshold:
+#             return i
+#     return -1
+
+# arr = [10, 25, 7, 15, 7, 30]
+# print(find_first_above(arr, 25))
+
+def binary_search(arr, target):
+    left = 0
+    right = len(arr) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
         else:
-            left.append(arr[i])
+            right = mid - 1
 
-    print("Контрольне число:", pivot)
-    print("Ліва частина:", left)
-    print("Права частина:", right)
+    return -1
 
-    return quick_sort(left) + [pivot] + quick_sort(right)
+arr = [1, 3, 5, 7, 9, 11, 15]
+target = 7
 
-
-arr = [5, 4, 9, 1, 3, 2]
-
-print(quick_sort(arr))
+print(binary_search(arr, target))
