@@ -802,23 +802,347 @@ import random, time, heapq
 # arr = [10, 25, 7, 15, 7, 30]
 # print(find_first_above(arr, 25))
 
-def binary_search(arr, target):
-    left = 0
-    right = len(arr) - 1
+# def binary_search(arr, target):
+#     left = 0
+#     right = len(arr) - 1
 
-    while left <= right:
-        mid = (left + right) // 2
+#     while left <= right:
+#         mid = (left + right) // 2
 
-        if arr[mid] == target:
-            return mid
-        elif arr[mid] < target:
-            left = mid + 1
-        else:
-            right = mid - 1
+#         if arr[mid] == target:
+#             return mid
+#         elif arr[mid] < target:
+#             left = mid + 1
+#         else:
+#             right = mid - 1
 
-    return -1
+#     return -1
 
-arr = [1, 3, 5, 7, 9, 11, 15]
-target = 7
+# arr = [1, 3, 5, 7, 9, 11, 15]
+# target = 7
 
-print(binary_search(arr, target))
+# print(binary_search(arr, target))
+
+# Реалізуйте просту функцію find_substring(text, substring),
+# яка використовує вбудований метод find() для пошуку першого входження підрядка у рядок.
+# Початковий код:
+
+# def find_substring(text, substring):
+#     index = text.find(substring)
+#     return index
+
+# text = "Hello, welcome to Python programming!"
+# result = find_substring(text, "Python")
+# print("Перший індекс входження 'Python':", result)
+
+# Реалізуйте функцію find_substring_range(text, substring, start, end),
+# яка знаходить позицію підрядка, обмежуючи область пошуку параметрами start та end.
+# Початковий код:
+
+# def find_substring_range(text, substring, start, end):
+#     index = text.find(substring, start, end)
+#     return index
+
+# text = "banana"
+# result = find_substring_range(text, "na", 2, 5)
+# print("Позиція 'na' в тексті 'banana' у діапазоні 2-5:", result)
+
+# Реалізуйте функцію find_all_occurrences(text, substring),
+# яка повертає список усіх позицій, де входить заданий підрядок у тексті, використовуючи метод find().
+# # Початковий код:
+
+# # def find_all_occurrences(text, substring):
+# #     indicies = []
+# #     start = 0
+
+# #     while True:
+# #         index = text.find(substring, start)
+
+# #         if index == -1:
+# #             break
+
+# #         indicies.append(index)
+# #         start = index + 1
+
+# #     return indicies
+
+
+# # text = "abracadabra"
+# # result = find_all_occurrences(text, "abra")
+# # print("Усі позиції входження 'abra':", result)
+
+# # Реалізуйте функцію custom_find(text, substring), яка імітує роботу методу find()
+# # за допомогою циклу (без використання вбудованого методу).
+# # Функція має повертати індекс першого входження або -1, якщо підрядок не знайдено.
+# # Початковий код:
+
+# # def custom_find(text, substring):
+# #     for i in range(len(text) - len(substring) + 1):
+# #         if text[i:i + len(substring)] == substring:
+# #             return i
+
+# #     return -1
+
+
+# # text = "Hello, world!"
+# # result = custom_find(text, "world")
+# # print("Перший індекс входження 'world':", result)
+
+# # text = " ... фівцвар цвіашцвр 055-457-89-77. фвацщрівш пагшвціща фівщ ашіфп. ..."
+
+# # import re
+
+# # pattern = r"\d\d\d-\d\d\d-\d\d-\d\d"
+# # number = re.search(pattern, text)
+
+# # if number:
+# #     print(number.group())
+
+
+# import re
+
+# # text = "Телефони: 055-457-89-77, 067-123-45-67 та 093-987-65-43."
+
+# # pattern = r"\d\d\d-\d\d\d-\d\d-\d\d"
+
+# # numbers = re.findall(pattern, text)
+
+# # # print(numbers)
+
+# # text = "My numbers are 123 and 4567"
+
+# # import re
+
+# # text = "my numbers are 123 and 4567"
+
+# # numbers = re.findall(r"\d+", text)
+
+# # print(numbers)
+# import re
+
+# # text = "Контактний номер менеджера: +380 (67) 123-45-67, зателефонуйте завтра."
+
+# # pattern = r"\+380\s\((\d{2})\)\s(\d{3}-\d{2}-\d{2})"
+
+# # result = re.findall(pattern, text)
+
+# # print(result)
+
+# # if result:
+# #     operator_code = result[0][0]
+# #     number = result[0][1]
+
+# #     print("Код оператора:", operator_code)
+# #     print("Номер:", number)
+
+# # алгоритм Бойера–Мура
+# def boyer_moore_search(text, pattern):
+#     n = len(text)
+#     m = len(pattern)
+#     if m == 0:
+#         return 0
+
+#     bad_char_shift = {}
+#     for index, char in enumerate(pattern):
+#         bad_char_shift[char] = index
+
+#     s = 0
+#     while s <= n - m:
+#         j = m - 1
+#         while j >= 0 and pattern[j] == text[s + j]:
+#             j -= 1
+#         if j < 0:
+#             return s
+#         else:
+#             shift = max(1, j - bad_char_shift.get(text[s + j], -1))
+#             s += shift
+#     return -1
+
+
+# # text = "HERE IS A SIMPLE EXAMPLE"
+# # pattern = "EXAMPLE"
+# # index = boyer_moore_search(text, pattern)
+# # print(f"Підрядок '{pattern}' знайдено на позиції: {index}")
+
+# # Реалізуйте функцію bm_search_all(text, pattern),
+# # яка знаходить всі входження зразка в тексті за
+# # алгоритмом Бойера–Мура та повертає список індексів.
+# # Початковий код:
+
+# def bm_search_all(text, pattern):
+#     occurrences = []
+#     # Побудуйте таблицю для "поганого символу" для pattern
+#     # Виконайте пошук по тексту за алгоритмом Бойера–Мура, додаючи кожен знайдений індекс до occurrences
+#     pass
+
+# class NodeTree:
+#     def __init__(self, data, left=None, right=None):
+#         self.data = data
+#         self.left = left
+#         self.right = right
+
+# def print_tree(tree, level=0):
+#     if isinstance(tree, NodeTree):
+#         print_tree(tree.right, level+1)
+#         print("   " * level + str(tree.data))
+#         print_tree(tree.left, level+1)
+
+# root = NodeTree(
+#      10,
+#      NodeTree(5, NodeTree(1), NodeTree(7)),
+#      NodeTree(12, None, NodeTree(15))
+# )
+
+# # print_tree(root)
+
+# class Tree:
+#     def __init__(self, data):
+#         self.data = data
+#         self.children = []
+
+
+# def print_tree(tree, level=0):
+#     if not tree:
+#         return []
+
+#     print("  " * level + str(tree.data))
+
+#     for child in tree.children:
+#         print_tree(child, level + 1)
+
+
+# root = Tree("A")
+# node_B = Tree("B")
+# node_C = Tree("C")
+# node_D = Tree("D")
+# node_E = Tree("E")
+
+# root.children += [node_B, node_C, node_E]
+# node_C.children.append(node_D)
+
+# print_tree(root)
+
+# class TreeNode:
+#     def __init__(self, value):
+#         self.value = value
+#         self.children = []
+
+# def build_tree():
+#     root = TreeNode("A")
+
+#     B = TreeNode("B")
+#     C = TreeNode("C")
+#     D = TreeNode("D")
+
+#     E = TreeNode("E")
+#     F = TreeNode("F")
+#     G = TreeNode("G")
+
+#     root.children.append(B)
+#     root.children.append(C)
+#     root.children.append(D)
+
+#     B.children.append(E)
+
+#     D.children.append(F)
+#     D.children.append(G)
+
+#     return root
+
+
+# root = build_tree()
+
+# def print_tree(node, level=0):
+#     if node:
+# #         print("  " * level + node.value)
+
+# #     for child in node.children:
+# #         print_tree(child, level + 1)
+
+
+# # print_tree(root)
+
+# # class BinaryNode:
+# #     def __init__(self, value, left=None, right=None):
+# #         self.value = value
+# #         self.left = left
+# #         self.right = right
+
+
+# # def build_binary_tree():
+# #     root = BinaryNode(10)
+
+# #     root.left = BinaryNode(5)
+# #     root.right = BinaryNode(15)
+
+# #     root.left.left = BinaryNode(2)
+# #     root.left.right = BinaryNode(7)
+
+# #     root.right.right = BinaryNode(20)
+
+# #     return root
+
+
+# # root = build_binary_tree()
+
+# class NodeTree():
+#     def __init__(self, value, left=None, right=None):
+#         self.value = value
+#         self.left = left
+#         self.right = right
+
+# def build_tree():
+#     root = NodeTree(
+#         10,
+#         NodeTree(5, NodeTree(1), NodeTree(7)),
+#         NodeTree(12, None, NodeTree(15))
+# )
+#     return root
+
+# def tree_height(root):
+#     if root is None:
+#         return 0
+#     return 1 + max(tree_height(root.left), tree_height(root.right))
+
+# root = build_tree()
+# result = tree_height(root)
+# print(result)
+
+def count_nodes(root):
+    if root is None:
+        return 0
+
+    return 1 + count_nodes(root.left) + count_nodes(root.right)
+
+class TreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+
+def binary_tree_search(root, target):
+    if root is None:
+        return False
+
+    if root.value == target:
+        return True
+
+    if target < root.value:
+        return binary_tree_search(root.left, target)
+    else:
+        return binary_tree_search(root.right, target)
+
+
+root = TreeNode(10)
+root.left = TreeNode(5)
+root.right = TreeNode(15)
+root.left.left = TreeNode(3)
+root.left.right = TreeNode(7)
+root.right.left = TreeNode(12)
+root.right.right = TreeNode(20)
+
+
+# Пошук
+print(binary_tree_search(root, 7))   
+print(binary_tree_search(root, 13)) 
