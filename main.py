@@ -1108,41 +1108,247 @@ import random, time, heapq
 # result = tree_height(root)
 # print(result)
 
-def count_nodes(root):
-    if root is None:
-        return 0
+# def count_nodes(root):
+#     if root is None:
+#         return 0
 
-    return 1 + count_nodes(root.left) + count_nodes(root.right)
+#     return 1 + count_nodes(root.left) + count_nodes(root.right)
 
-class TreeNode:
-    def __init__(self, value):
-        self.value = value
-        self.left = None
-        self.right = None
-
-
-def binary_tree_search(root, target):
-    if root is None:
-        return False
-
-    if root.value == target:
-        return True
-
-    if target < root.value:
-        return binary_tree_search(root.left, target)
-    else:
-        return binary_tree_search(root.right, target)
+# class TreeNode:
+#     def __init__(self, value):
+#         self.value = value
+#         self.left = None
+#         self.right = None
 
 
-root = TreeNode(10)
-root.left = TreeNode(5)
-root.right = TreeNode(15)
-root.left.left = TreeNode(3)
-root.left.right = TreeNode(7)
-root.right.left = TreeNode(12)
-root.right.right = TreeNode(20)
+# def binary_tree_search(root, target):
+#     if root is None:
+#         return False
+
+#     if root.value == target:
+#         return True
+
+#     if target < root.value:
+#         return binary_tree_search(root.left, target)
+#     else:
+#         return binary_tree_search(root.right, target)
 
 
-# Пошук
-print(binary_tree_search(root, 7))   
-print(binary_tree_search(root, 13)) 
+# root = TreeNode(10)
+# root.left = TreeNode(5)
+# root.right = TreeNode(15)
+# root.left.left = TreeNode(3)
+# root.left.right = TreeNode(7)
+# root.right.left = TreeNode(12)
+# root.right.right = TreeNode(20)
+
+
+# # Пошук
+# print(binary_tree_search(root, 7))   
+# print(binary_tree_search(root, 13)) 
+
+# graph = {
+#     'A': ['B', 'C'],
+# #     'B': ['A', 'D', 'E'],
+# #     'C': ['A', 'F'],
+# #     'D': ['B'],
+# #     'E': ['B', 'F'],
+# #     'F': ['C', 'E']
+# # }
+
+# # class Graph:
+
+# #     def init(self):
+# #         self.adjacency = {}
+
+# #     def add_vertex(self, v) -> None:
+# #         if v not in self.adjacency:
+# #             self.adjacency[v] = []
+
+# #     def add_edge(self, u, v, directed=False) -> None:
+# #         if u not in self.adjacency:
+# #             self.add_vertex(u)
+
+# #         if v not in self.adjacency:
+# #             self.add_vertex(v)
+
+# #         self.adjacency[u].append(v)
+
+# #         if not directed:
+# #             self.adjacency[v].append(u)
+
+# #     def get_neighbors(self, vertex) -> list[str]:
+# #         return self.adjacency[vertex]
+
+# #     def str(self) -> str:
+# #         return "\n".join(
+# #             [f"Vertex {u}: {v}" for u, v in self.adjacency.items()]
+# #         )
+
+
+# # g = Graph()
+
+# # g.add_edge("A", "B")
+# # g.add_edge("A", "C")
+# # g.add_edge("B", "D")
+# # g.add_edge("B", "E")
+# # g.add_edge("C", "F")
+# # g.add_edge("E", "F")
+
+# # # # В
+# # graph_matrix = [
+# #     [0, 1, 1, 0, 0, 0],
+# #     [1, 0, 0, 1, 1, 0],
+# #     [1, 0, 0, 0, 0, 1],
+# #     [0, 1, 0, 0, 0, 0],
+# #     [0, 1, 0, 0, 0, 1],
+# #     [0, 0, 1, 0, 1, 0]
+# # ]
+
+# # def to_adjacency_matrix(graph):
+# #     vertices = sorted(graph.adjacency.keys())
+# #     n = len(vertices)
+# #     matrix = [[0]*n for _ in range(n)]
+# #     index = {vertex: i for i, vertex in enumerate(vertices)}
+# #     for vertex, neighbors in graph.adjacency.items():
+# #         for neighbor in neighbors:
+# #             matrix[index[vertex]][index[neighbor]] = 1
+# #     return matrix
+
+
+
+
+class Graph:
+    def __init__(self):
+        self.adjacency_list = {}
+
+    def add_vertex(self, vertex):
+        if vertex not in self.adjacency_list:
+            self.adjacency_list[vertex] = []
+
+    def add_edge(self, u, v, directed=True):
+        self.add_vertex(u)
+        self.add_vertex(v)
+
+        self.adjacency_list[u].append(v)
+
+        if not directed:
+            self.adjacency_list[v].append(u)
+
+g = Graph()
+
+# g.add_edge("A", "B")
+# g.add_edge("A", "C")
+# g.add_edge("B", "D")
+
+# print(g.adjacency_list)
+
+# Реалізуйте клас для орієнтованого графа.
+# Створіть методи для додавання вершин і
+# ребер із зазначенням напрямку.
+
+# Реалізуйте клас для орієнтованого графа.
+# Створіть методи для додавання вершин і
+# ребер із зазначенням напрямку.
+
+# class DirectedGraph:
+#     def __init__(self):
+#         self.adjacency = {}
+
+#     def add_vertex(self, vertex):
+#         if vertex not in self.adjacency:
+#             self.adjacency[vertex] = []
+
+#     def add_edge(self, u, v):
+#         self.add_vertex(u)
+#         self.add_vertex(v)
+
+#         self.adjacency[u].append(v)
+
+
+# dg = DirectedGraph()
+
+# dg.add_edge('A', 'B')
+# dg.add_edge('A', 'C')
+# dg.add_edge('B', 'D')
+
+# print("Орієнтований граф (Adjacency List):")
+# print(dg.adjacency)
+
+# class WeightedDirectedGraph:
+#     def __init__(self):
+#         self.adjacency = {}
+
+#     def add_vertex(self, vertex):
+#         if vertex not in self.adjacency:
+#             self.adjacency[vertex] = []
+
+#     def add_edge(self, u, v, weight):
+#         self.add_vertex(u)
+#         self.add_vertex(v)
+
+#         self.adjacency[u].append((v, weight))
+
+
+# g = WeightedDirectedGraph()
+
+# g.add_edge('A', 'B', 5)
+# g.add_edge('A', 'C', 2)
+# g.add_edge('B', 'D', 7)
+
+# print("Орієнтований граф з вагами:")
+# print(g.adjacency)
+
+# class Graph:
+#     def __init__(self):
+#         self.adjacency: dict[str, list[str]] = {}
+
+#     def add_vertex(self, v):
+#         if v not in self.adjacency:
+#             self.adjacency[v] = []
+
+#     def add_edge(self, u, v, directed=False):
+#         if u not in self.adjacency:
+#             self.add_vertex(u)
+#         if v not in self.adjacency:
+#             self.add_vertex(v)
+
+#         self.adjacency[u].append(v)
+#         if not directed:
+#             self.adjacency[v].append(u)
+
+#     def get_neighbors(self, vertex):
+#         return self.adjacency[vertex]
+
+#     def __str__(self) -> str:
+#         return "\n".join([f"Vertex {u}: {v}" for u, v in self.adjacency.items()])
+
+
+# g = Graph()
+# g.add_edge("A", "B")
+# g.add_edge("A", "C")
+# g.add_edge("B", "D")
+# g.add_edge("B", "E")
+# g.add_edge("C", "F")
+# g.add_edge("E", "F")
+
+
+# def dfs(graph, start):
+#     visited = set()
+#     stack = [start]
+#     result = []
+#     while stack:
+#         vertex = stack.pop()
+#         if vertex not in visited:
+#             visited.add(vertex)
+#             result.append(vertex)
+#             stack.extend(reversed(graph.adjacency[vertex]))
+#     return result
+
+# print("DFS обхід:", dfs(dg, 'A'))
+
+# S 0 0 1 0
+# 1 1 0 1 0
+# 0 0 0 0 0
+# 0 1 1 1 0
+# 0 0 0 E 1
