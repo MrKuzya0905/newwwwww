@@ -1352,3 +1352,285 @@ g = Graph()
 # 0 0 0 0 0
 # 0 1 1 1 0
 # 0 0 0 E 1
+
+# graph = {
+#     'A': ['B', 'C'],
+#     'B': ['D', 'E'],
+#     'C': ['F'],
+#     'D': [],
+#     'E': ['F'],
+#     'F': []
+# }
+
+
+# def dfs_recursive(node, visited=None):
+#     if not visited:
+#         visited = set()
+
+#     visited.add(node)
+
+#     for neighbor in graph[node]:
+#         if neighbor not in visited:
+#             visited.add(neighbor)
+#             dfs_recursive(neighbor, visited)
+
+#     return visited
+
+
+# print("Visited: ", dfs_recursive("A"))
+
+# def dfs_iterative(node, graph):
+#     visited = set()
+#     stack = [node]
+
+#     while stack:
+#         node = stack.pop()
+
+#         if node not in visited:
+#             visited.add(node)
+#             stack.extend(reversed(graph[node]))
+
+#     return visited
+
+
+# print("Visited: ", dfs_iterative("A", graph))
+
+# def dfs_component(node, graph, visited):
+#     visited.add(node)
+#     component = [node]
+#     for neighbor in graph[node]:
+#         if neighbor not in visited:
+#             component.extend(dfs_component(neighbor, graph, visited))
+#     return component
+
+# def find_connected_components(graph):
+#     visited = set()
+#     components = []
+#     for node in graph:
+#         if node not in visited:
+#             component = dfs_component(node, graph, visited)
+#             components.append(component)
+#     return components
+
+# graph = {
+#     'A': ['B'],
+#     'B': ['A', 'C'],
+#     'C': ['B'],
+#     'D': ['E'],
+#     'E': ['D'],
+#     'F': []
+# }
+
+# components = find_connected_components(graph)
+# for comp in components:
+#     print(comp)
+
+# def dfs_topological(node: str, graph: dict, visited: set, stack: list):
+#     visited.add(node)
+#     for neighbor in graph[node]:
+#         if neighbor not in visited:
+#             dfs_topological(neighbor, graph, visited, stack)
+#     stack.append(node)
+
+# def topological_sort(graph):
+#     visited = set()
+#     stack = []
+#     for node in graph:
+#         if node not in visited:
+#             dfs_topological(node, graph, visited, stack)
+#     return stack[::-1]
+
+# graph_dag = {
+#     'A': ['C', 'D'],
+#     'B': ['D'],
+#     'C': ['E'],
+#     'D': ['F'],
+#     'E': ['F'],
+#     'F': []
+# }
+
+# order = topological_sort(graph_dag)
+# print("Топологічне сортування:", order)
+
+# def dfs_cycle(node, graph, visited, rec_stack):
+#     visited.add(node)
+#     rec_stack.add(node)
+#     for neighbor in graph[node]:
+#         if neighbor not in visited:
+#             if dfs_cycle(neighbor, graph, visited, rec_stack):
+#                 return True
+#         elif neighbor in rec_stack:
+#             return True
+#     rec_stack.remove(node)
+#     return False
+
+# def has_cycle(graph):
+#     visited = set()
+#     rec_stack = set()
+#     for node in graph:
+#         if node not in visited:
+#             if dfs_cycle(node, graph, visited, rec_stack):
+#                 return True
+#     return False
+
+# graph_cycle = {
+#     'A': ['B'],
+#     'B': ['C'],
+#     'C': ['A'],
+#     'D': ['E'],
+#     'E': []
+# }
+
+# print("Граф містить цикл:", has_cycle(graph_cycle))
+
+# def dfs_labyrinth(maze, start, end):
+#     rows, cols = len(maze), len(maze[0])
+#     stack = [start]
+#     visited = {start: None}
+
+#     while stack:
+#         current = stack.pop()
+#         if current == end:
+#             break
+#         row, col = current
+#         for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+#             r, c = row + dr, col + dc
+#             if 0 <= r < rows and 0 <= c < cols and maze[r][c] == 0 and (r, c) not in visited:
+# #                 visited[(r, c)] = current
+# #                 stack.append((r, c))
+
+# #     path = []
+# #     if end not in visited:
+# #         return None
+# #     current = end
+# #     while current is not None:
+# #         path.append(current)
+# #         current = visited[current]
+# #     path.reverse()
+# #     return path
+
+# # labyrinth = [
+# #     [0, 1, 0, 0, 0],
+# #     [0, 1, 0, 1, 0],
+# #     [0, 0, 0, 1, 0],
+# #     [0, 1, 1, 1, 0],
+# #     [0, 0, 0, 0, 0]
+# # ]
+
+# # graph_matrix = [
+# #     [0, 1, 1, 0, 0, 0],
+# #     [1, 0, 0, 1, 1, 0],
+# #     [1, 0, 0, 0, 0, 1],
+# #     [0, 1, 0, 0, 0, 0],
+# #     [0, 1, 0, 0, 0, 1],
+# #     [0, 0, 1, 0, 1, 0]
+# # ]
+
+# # start = (0, 0)   # верхній лівий кут
+# # end = (4, 4)     # нижній правий кут
+
+# # print("Пошук шляху в лабіринті за допомогою DFS:")
+# # dfs_labyrinth(labyrinth, start, end)
+
+# graph_matrix = [
+#     [0, 0, 1, 0, 0, 0],
+#     [1, 0, 0, 0, 1, 0],
+#     [1, 0, 0, 0, 0, 0],
+#     [0, 1, 0, 0, 0, 0],
+#     [0, 1, 0, 0, 0, 0],
+#     [0, 0, 1, 0, 1, 0]
+# ]
+
+# start = (0, 0)
+# end = (5, 5)
+
+
+
+# def dfs_labyrinth(maze, start, end):
+#     rows, cols = len(maze), len(maze[0])
+#     stack = [start]
+#     visited = {start: None}
+#     count = 0
+
+#     while stack:
+#         current = stack.pop()
+#         if current == end:
+#             break
+#         row, col = current
+#         for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+#             r, c = row + dr, col + dc
+#             if 0 <= r < rows and 0 <= c < cols and maze[r][c] == 0 and (r, c) not in visited:
+#                 visited[(r, c)] = current
+#                 print(f"Курсор знаходиться на координаті {current}")
+#                 count += 1
+#                 stack.append((r, c))
+
+#     path = []
+#     if end not in visited:
+#         return None
+#     current = end
+#     while current is not None:
+#         path.append(current)
+#         current = visited[current]
+#     path.reverse()
+#     return path, count
+
+
+# def visualize_path_dfs(maze, path):
+#     rows, cols = len(maze), len(maze[0])
+#     visual_maze = [row[:] for row in maze]
+
+#     if path:
+#         for r, c in path:
+#             if (r, c) != path[0] and (r, c) != path[-1]:
+#                 visual_maze[r][c] = 2
+
+#     print("Лабіринт з позначеним шляхом (0 - вільна клітинка, 1 - стіна, 2 - шлях):")
+#     for row in visual_maze:
+#         print(" ".join(map(str, row)))
+
+# path, count = dfs_labyrinth(graph_matrix, start, end)
+# visualize_path_dfs(graph_matrix, path)
+# start = (0, 0)
+# end = (5, 5)
+
+# visualize_path_dfs(graph_matrix, start)
+
+# # def dfs_recursive(root):
+# # # Якщо вузол порожній, поверніть порожній список
+# #     # Інакше, поверніть список: [root.value] + рекурсивний обхід лівого піддерева + рекурсивний обхід правого піддерева
+# #     # pass
+
+# # # Приклад дерева
+# # class Node:
+# #     def __init__(self, value, left=None, right=None):
+# #         self.value = value
+# #         self.left = left
+# #         self.right = right
+
+# # tree = Node(10,
+# #             Node(5, Node(2), Node(7)),
+# #             Node(15, None, Node(20))
+# #            )
+
+# # result = dfs_recursive(tree)
+# # print("DFS рекурсивний обхід:", result)
+
+# class Node:
+#     def __init__(self, value, left=None, right=None):
+#         self.value = value
+#         self.left = left
+#         self.right = right
+
+
+# # Початковий код:
+# def dfs_iterative(root):
+#     # Ініціалізуйте стек з кореня
+#     # Ініціалізуйте порожній список для збереження результатів
+#     # Поки стек не порожній, дістаньте вузол, додайте його значення до результату
+#     # Додайте спочатку праве, потім ліве піддерево у стек
+#     pass
+
+# # Використайте клас Node з попереднього завдання
+# result = dfs_iterative(tree)
+# print("DFS ітеративний обхід:", result)

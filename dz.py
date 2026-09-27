@@ -1,44 +1,55 @@
-class BinaryNode:
-    def __init__(self, value, left=None, right=None):
-        self.value = value
-        self.left = left
-        self.right = right
+from collections import deque
 
 
-root = BinaryNode(
-    10,
-    BinaryNode(
-        5,
-        BinaryNode(2),
-        BinaryNode(7)
-    ),
-    BinaryNode(15)
-)
+class SocialGraph:
+    def __init__(self):
+        self.graph = {}
+
+    def add_person(self, person):
+        if person not in self.graph:
+            self.graph[person] = []
+
+    def add_connection(self, person1, person2):
+        self.graph[person1].append(person2)
+        self.graph[person2].append(person1)
+
+    def bfs_distance_2(self, start):
+        queue = deque([(start, 0)])
+        visited = {start}
+        result = []
+
+        while queue:
+            person, distance = queue.popleft()
+
+            if distance > 0:
+                result.append(person)
+
+            if distance == 2:
+                continue
+
+            for friend in self.graph[person]:
+                if friend not in visited:
+                    visited.add(friend)
+                    queue.append((friend, distance + 1))
+
+        return result
 
 
-# Завдання 1
+g = SocialGraph()
 
-def iterative_preorder(root):
-    if root is None:
-        return []
-    stack = [root]
-    result = []
-    while stack:
-        node = stack.pop()
-        result.append(node.value)
-        if node.right:
-            stack.append(node.right)
-        if node.left:
-            stack.append(node.left)
-    return result
+people = ["Анна", "Богдан", "Віктор", "Ганна", "Дмитро", "Олег", "Ірина"]
 
-print("Iterative pre-order traversal:", iterative_preorder(root))
+for person in people:
+    g.add_person(person)
 
-# Завдання 2
+g.add_connection("Анна", "Богдан")
+g.add_connection("Анна", "Віктор")
+g.add_connection("Богдан", "Ганна")
+g.add_connection("Віктор", "Дмитро")
+g.add_connection("Ганна", "Олег")
+g.add_connection("Дмитро", "Ірина")
 
-def sum_tree(root):
-    if root is None:
-        return 0
-    return root.value + sum_tree(root.left) + sum_tree(root.right)
+result = g.bfs_distance_2("Анна")
 
-print("Сума значень у BST:", sum_tree(root))
+print("Люди на відстані не більше 2 кроків від Анни:")
+print(result)
