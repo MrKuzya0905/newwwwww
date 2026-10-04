@@ -1,18 +1,15 @@
-a = [1,4,5]
-b= [6,8,9]
+results = []
 
-print("AxB={", end="")
+for p in [False, True]:
+    for q in [False, True]:
+        for r in [False, True]:
 
-for i in range(3):
-    for j in range(3):
-        print(f"({a[i]}, {b[j]});", end="")
+            F = (not p) or (not q) or r
+            results.append(F)
 
-print("}")
-
-print("AxA={", end="")
-
-for i in range(3):
-    for j in range(3):
-        print(f"({a[i]}, {a[j]});", end="")
-
-print("}")
+if all(results):
+    print("Формула тотожно істинна")
+elif not any(results):
+    print("Формула тотожно хибна")
+else:
+    print("Формула ні істинна, ні хибна")
