@@ -1819,26 +1819,255 @@ def get_path(previous_nodes, target):
 #     'PC4': {'Switch2': 1},
 #     'PC5': {'Switch3': 1},
 #     'PC6': {'Switch3': 2}
+# # }
+
+# graph_flights = {
+#     'KBP (Київ)': {'WAW (Варшава)': 70, 'IST (Стамбул)': 90, 'FRA (Франкфурт)': 140},
+#     'WAW (Варшава)': {'KBP (Київ)': 70, 'LHR (Лондон)': 45, 'FRA (Франкфурт)': 50, 'CDG (Париж)': 60},
+#     'IST (Стамбул)': {'KBP (Київ)': 90, 'DXB (Дубай)': 120, 'FRA (Франкфурт)': 110, 'JFK (Нью-Йорк)': 450},
+#     'FRA (Франкфурт)': {'KBP (Київ)': 140, 'WAW (Варшава)': 50, 'IST (Стамбул)': 110, 'JFK (Нью-Йорк)': 320, 'CDG (Париж)': 40},
+#     'CDG (Париж)': {'WAW (Варшава)': 60, 'FRA (Франкфурт)': 40, 'JFK (Нью-Йорк)': 280, 'LHR (Лондон)': 35},
+#     'LHR (Лондон)': {'WAW (Варшава)': 45, 'CDG (Париж)': 35, 'JFK (Нью-Йорк)': 260},
+#     'DXB (Дубай)': {'IST (Стамбул)': 120, 'JFK (Нью-Йорк)': 500},
+#     'JFK (Нью-Йорк)': {'FRA (Франкфурт)': 320, 'CDG (Париж)': 280, 'LHR (Лондон)': 260, 'IST (Стамбул)': 450, 'DXB (Дубай)': 500}
 # }
 
-graph_flights = {
-    'KBP (Київ)': {'WAW (Варшава)': 70, 'IST (Стамбул)': 90, 'FRA (Франкфурт)': 140},
-    'WAW (Варшава)': {'KBP (Київ)': 70, 'LHR (Лондон)': 45, 'FRA (Франкфурт)': 50, 'CDG (Париж)': 60},
-    'IST (Стамбул)': {'KBP (Київ)': 90, 'DXB (Дубай)': 120, 'FRA (Франкфурт)': 110, 'JFK (Нью-Йорк)': 450},
-    'FRA (Франкфурт)': {'KBP (Київ)': 140, 'WAW (Варшава)': 50, 'IST (Стамбул)': 110, 'JFK (Нью-Йорк)': 320, 'CDG (Париж)': 40},
-    'CDG (Париж)': {'WAW (Варшава)': 60, 'FRA (Франкфурт)': 40, 'JFK (Нью-Йорк)': 280, 'LHR (Лондон)': 35},
-    'LHR (Лондон)': {'WAW (Варшава)': 45, 'CDG (Париж)': 35, 'JFK (Нью-Йорк)': 260},
-    'DXB (Дубай)': {'IST (Стамбул)': 120, 'JFK (Нью-Йорк)': 500},
-    'JFK (Нью-Йорк)': {'FRA (Франкфурт)': 320, 'CDG (Париж)': 280, 'LHR (Лондон)': 260, 'IST (Стамбул)': 450, 'DXB (Дубай)': 500}
-}
+# start = "KBP (Київ)"
+# target = "JFK (Нью-Йорк)"
+# distances, previous_nodes = dijkstra(graph_flights, start)
 
-start = "KBP (Київ)"
-target = "JFK (Нью-Йорк)"
-distances, previous_nodes = dijkstra(graph_flights, start)
+# path = get_path(previous_nodes, target)
 
-path = get_path(previous_nodes, target)
+# print("Найкоротший маршрут:")
+# print(" -> ".join(path))
 
-print("Найкоротший маршрут:")
-print(" -> ".join(path))
+# print("Кількість годин:", distances[target])
 
-print("Кількість годин:", distances[target])
+# def count_chars(text):
+#     result = {}
+
+#     for char in text:
+#         if char in result:
+#             result[char] += 1
+#         else:
+#             result[char] = 1
+
+#     return result
+
+
+# print(count_chars("hello"))
+
+# import math
+
+# class HashTable:
+#     def init(self, m):
+#         self.m = m
+#         self.A = 0.6180339887
+#         self.table = [[] for _ in range(m)]
+
+#     def hash_function(self, k):
+#         return math.floor(self.m * ((k * self.A) % 1))
+
+#     def insert(self, key, value):
+#         index = self.hash_function(key)
+
+#         for i, (k, v) in enumerate(self.table[index]):
+#             if k == key:
+#                 self.table[index][i] = (key, value)
+#                 return
+
+#         self.table[index].append((key, value))
+
+#     def search(self, key):
+#         index = self.hash_function(key)
+
+#         for k, v in self.table[index]:
+#             if k == key:
+#                 return v
+
+#         return None
+
+#     def delete(self, key):
+#         index = self.hash_function(key)
+
+#         for i, (k, v) in enumerate(self.table[index]):
+#             if k == key:
+#                 del self.table[index][i]
+#                 return True
+
+#         return False
+
+#     def display(self):
+#         for i, bucket in enumerate(self.table):
+#             print(f"{i}: {bucket}")
+
+
+# # Приклад використання
+# ht = HashTable(10)
+
+# ht.insert(15, "Яблуко")
+# ht.insert(25, "Банан")
+# ht.insert(35, "Апельсин")
+
+# # print("Хеш-таблиця:")
+# # ht.display()
+
+# # print("Пошук ключа 25:", ht.search(25))
+
+# # print("Видалення ключа 15:", ht.delete(15))
+
+# # print("Пошук ключа 15:", ht.search(15))
+
+
+# # def analyze_mod_hash(keys, m):
+# #     collisions = {}
+
+# #     for key in keys:
+# #         h = key % m
+
+# #         if h not in collisions:
+# #             collisions[h] = []
+
+# #         collisions[h].append(key)
+
+# #     for h, bucket in collisions.items():
+# #         if len(bucket) > 1:
+# #             print(f"h={h}: {bucket}")
+
+
+# # keys = list(range(1, 30))
+# # m = 7
+# # analyze_mod_hash(keys, m)
+
+# # def get_quadratic_probe_sequence(key, m, c1, c2, steps):
+# #     sequence = []
+
+# #     for i in range(steps):
+# #         pos = (key % m + c1 * i + c2 * i**2) % m
+# #         sequence.append(pos)
+
+# #     return sequence
+
+# # print("Задача 4. Послідовність індексів:", get_quadratic_probe_sequence(key=7, m=11, c1=1, c2=3, steps=4))
+# # i=0: 7; i=1: (7+1+3)%11=0; i=2: (7+2+12)%11=10; i=3: (7+3+27)%11=4 -> [7, 0, 10, 4]
+
+# # def group_words_by_length(words):
+# #     result = {}
+
+# #     for word in words:
+# #         length = len(word)
+
+# #         if length not in result:
+# #             result[length] = []
+
+# #         result[length].append(word)
+
+# #     return result
+
+
+# # words = ["cat", "dog", "apple", "home", "car"]
+# # print(group_words_by_length(words))
+
+# # def find_winner(votes):
+# #     counts = {}
+
+# #     for name in votes:
+# #         if name in counts:
+# #             counts[name] += 1
+# #         else:
+# #             counts[name] = 1
+
+# #     winner = max(counts, key=counts.get)
+# #     return winner
+
+
+# # votes = ["Олена", "Ігор", "Олена", "Андрій", "Ігор", "Олена"]
+
+# # print(find_winner(votes))
+
+# class PhoneBook:
+#     def __init__(self):
+#         self.contacts = {}
+
+#     def add_contact(self, name, phone):
+#         self.contacts[name] = phone
+
+#     def get_phone(self, name):
+#         return self.contacts.get(name)
+
+#     def delete_contact(self, name):
+#         if name in self.contacts:
+#             del self.contacts[name]
+
+
+# book = PhoneBook()
+
+# book.add_contact("Олена", "0991234567")
+# book.add_contact("Ігор", "0677654321")
+
+# print(book.get_phone("Олена"))  
+# print(book.get_phone("Ігор"))   
+# print(book.get_phone("Андрій")) 
+
+# book.delete_contact("Олена")
+
+# print(book.get_phone("Олена")) 
+
+# def coin_change(coins, amount):
+#     result = {}
+
+#     coins.sort(reverse=True)
+
+#     for coin in coins:
+#         count = amount // coin
+
+#         if count > 0:
+#             result[coin] = count
+#             amount %= coin
+
+#     return result
+
+
+# coins = [25, 10, 5, 1]
+# amount = 63
+
+# print("Монети для здачі:", coin_change(coins, amount))
+
+# import heapq
+# from collections import Counter
+
+# def huffman(text):
+#     freq = Counter(text)
+
+#     heap = []
+#     for char, count in freq.items():
+#         heapq.heappush(heap, (count, char, {char: ""}))
+
+#     while len(heap) > 1:
+#         f1, _, codes1 = heapq.heappop(heap)
+#         f2, _, codes2 = heapq.heappop(heap)
+
+#         for char in codes1:
+#             codes1[char] = "0" + codes1[char]
+
+#         for char in codes2:
+#             codes2[char] = "1" + codes2[char]
+
+#         new_codes = {codes1, codes2}
+
+#         heapq.heappush(
+#             heap,
+#             (f1 + f2, min(codes1.keys() | codes2.keys()), new_codes)
+#         )
+
+#     codes = heap[0][2]
+
+#     print("Коди Хаффмана:")
+#     for char, code in sorted(codes.items()):
+#         print(f"{char}: {code}")
+
+#     print("Довжина коду для R:", len(codes['R']))
+
+
+# text = "ABRACADABRA"
+# huffman(text)
