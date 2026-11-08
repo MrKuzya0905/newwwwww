@@ -1,217 +1,123 @@
-import matplotlib.pyplot as plt
-import math
 
-# 1
+import heapq
+from collections import Counter
 
-class MyHashTable:
-    def __init__(self, size):
-        self.size = size
-        self.table = [[] for _ in range(size)]
-        self.collisions = 0
 
-    def hash_function(self, key):
-        return hash(key) % self.size
+class Node:
+    def __init__(self, char, freq):
+        self.char = char
+        self.freq = freq
+        self.left = None
+        self.right = None
 
-    def add(self, key, value):
-        index = self.hash_function(key)
+    def __lt__(self, other):
+        return self.freq < other.freq
 
-        if self.table[index]:
-            self.collisions += 1
 
-        for i, (k, v) in enumerate(self.table[index]):
-            if k == key:
-                self.table[index][i] = (key, value)
-                return
+def build_huffman_tree(text):
+    frequency = Counter(text)
 
-        self.table[index].append((key, value))
+    heap = []
 
-    def search(self, key):
-        index = self.hash_function(key)
+    for char, freq in frequency.items():
+        heapq.heappush(heap, Node(char, freq))
 
-        for k, v in self.table[index]:
-            if k == key:
-                return v
-
+    if not heap:
         return None
 
-    def delete(self, key):
-        index = self.hash_function(key)
+    while len(heap) > 1:
+        left = heapq.heappop(heap)
+        right = heapq.heappop(heap)
 
-        for i, (k, v) in enumerate(self.table[index]):
-            if k == key:
-                del self.table[index][i]
-                return True
+        merged = Node(None, left.freq + right.freq)
+        merged.left = left
+        merged.right = right
 
-        return False
+        heapq.heappush(heap, merged)
 
-
-keys = [f"key{i}" for i in range(100)]
-
-for size in [5, 10, 20, 50, 100]:
-    ht = MyHashTable(size)
-
-    for key in keys:
-        ht.add(key, "value")
-
-    print(f"Розмір таблиці: {size}")
-    print(f"Кількість колізій: {ht.collisions}")
-    print()
+    return heap[0]
 
 
-# 2
+def build_codes(root):
+    codes = {}
 
-def mod_hash(key, m):
-    return key % m
+    def generate_codes(node, code):
+        if node is None:
+            return
 
+        if node.char is not None:
+            codes[node.char] = code if code else "0"
+            return
 
-def multiplicative_hash(key, m, A):
-    return math.floor(m * ((key * A) % 1))
+        generate_codes(node.left, code + "0")
+        generate_codes(node.right, code + "1")
 
-
-keys = list(range(1, 1001))
-m = 20
-A = 0.6180339887
-
-mod_results = [mod_hash(k, m) for k in keys]
-
-mult_results = [
-    multiplicative_hash(k, m, A)
-    for k in keys
-]
-
-plt.figure(figsize=(12, 5))
-
-plt.subplot(1, 2, 1)
-plt.hist(mod_results, bins=range(m + 1), edgecolor="black")
-plt.title("Модульне гешування")
-plt.xlabel("Геш-значення")
-plt.ylabel("Кількість ключів")
-
-plt.subplot(1, 2, 2)
-plt.hist(mult_results, bins=range(m + 1), edgecolor="black")
-plt.title("Мультиплікативне гешування")
-plt.xlabel("Геш-значення")
-plt.ylabel("Кількість ключів")
-
-plt.tight_layout()
-plt.show()
-
-# 3
-
-def multiplicative_hash(key, m, A):
-    return math.floor(m * ((key * A) % 1))
+    generate_codes(root, "")
+    return codes
 
 
-def analyze_distribution(keys, m, A):
-    counts = [0] * m
-
-    for key in keys:
-        index = multiplicative_hash(key, m, A)
-        counts[index] += 1
-
-    average = len(keys) / m
-
-    variance = sum(
-        (count - average) ** 2 for count in counts
-    ) / m
-
-    print(f"Розмір таблиці: {m}")
-    print(f"Константа A: {A}")
-    print(f"Мінімальна кількість: {min(counts)}")
-    print(f"Максимальна кількість: {max(counts)}")
-    print(f"Дисперсія: {variance:.2f}")
-    print()
+def encode(text, codes):
+    return "".join(codes[char] for char in text)
 
 
-keys = list(range(1, 1001))
+def decode(encoded_text, root):
+    if root is None:
+        return ""
 
-for m in [10, 20, 50, 100]:
-    for A in [0.5, 0.6180339887, 0.75]:
-        analyze_distribution(keys, m, A)
+    if root.char is not None:
+        return root.char * len(encoded_text)
 
-# 4
+    result = ""
+    current = root
 
-class PhoneBook:
-    def __init__(self, size=10):
-        self.size = size
-        self.table = [[] for _ in range(size)]
-
-    def hash_function(self, name):
-        return sum(ord(char) for char in name) % self.size
-
-    def add_contact(self, name, phone):
-        index = self.hash_function(name)
-
-        for i, (n, p) in enumerate(self.table[index]):
-            if n == name:
-                self.table[index][i] = (name, phone)
-                return
-
-        self.table[index].append((name, phone))
-        print("Контакт додано!")
-
-    def search_contact(self, name):
-        index = self.hash_function(name)
-
-        for n, p in self.table[index]:
-            if n == name:
-                return p
-
-        return None
-
-    def delete_contact(self, name):
-        index = self.hash_function(name)
-
-        for i, (n, p) in enumerate(self.table[index]):
-            if n == name:
-                del self.table[index][i]
-                print("Контакт видалено!")
-                return
-
-        print("Контакт не знайдено!")
-
-    def show_contacts(self):
-        for bucket in self.table:
-            for name, phone in bucket:
-                print(f"{name}: {phone}")
-
-
-book = PhoneBook()
-
-while True:
-    print("\n--- ТЕЛЕФОННА КНИГА ---")
-    print("1. Додати контакт")
-    print("2. Знайти контакт")
-    print("3. Видалити контакт")
-    print("4. Показати всі контакти")
-    print("5. Вийти")
-
-    choice = input("Оберіть дію: ")
-
-    if choice == "1":
-        name = input("Введіть ім'я: ")
-        phone = input("Введіть номер телефону: ")
-        book.add_contact(name, phone)
-
-    elif choice == "2":
-        name = input("Введіть ім'я: ")
-        result = book.search_contact(name)
-
-        if result:
-            print("Номер телефону:", result)
+    for bit in encoded_text:
+        if bit == "0":
+            current = current.left
         else:
-            print("Контакт не знайдено!")
+            current = current.right
 
-    elif choice == "3":
-        name = input("Введіть ім'я: ")
-        book.delete_contact(name)
+        if current.char is not None:
+            result += current.char
+            current = root
 
-    elif choice == "4":
-        book.show_contacts()
+    return result
 
-    elif choice == "5":
-        print("Завершення програми.")
-        break
 
-    else:
-        print("Неправильний вибір!")
+def main():
+    with open("text.txt", "r", encoding="utf-8") as file:
+        text = file.read()
+
+    if not text:
+        print("Файл порожній!")
+        return
+
+    frequency = Counter(text)
+
+    print("Частота символів:")
+    for char, freq in frequency.items():
+        print(repr(char), ":", freq)
+
+    root = build_huffman_tree(text)
+
+    codes = build_codes(root)
+
+    print("\nКоди Хаффмана:")
+    for char, code in codes.items():
+        print(repr(char), ":", code)
+
+    encoded_text = encode(text, codes)
+
+    print("\nЗакодований текст:")
+    print(encoded_text)
+
+    decoded_text = decode(encoded_text, root)
+
+    print("\nДекодований текст:")
+    print(decoded_text)
+
+    print("\nРезультат перевірки:")
+    print("Тексти однакові:", text == decoded_text)
+
+
+if __name__ == "__main__":
+    main()
